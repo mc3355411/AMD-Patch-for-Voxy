@@ -38,7 +38,7 @@ To fix the rendering corruption on AMD cards, this patch may need to alter or di
 
 The community has reported successful tests on the following GPU architectures:
 
-* **RX 500 Series:** (e.g., RX 550, RX 580) - *Confirmed Working*
+* **RX 500 Series:** (e.g., RX 550, RX 560, RX 580) - *Confirmed Working*
 
 > *Have you tested this on RX 6000, 7000, or older cards? Please open an Issue to let us know so we can update this list!*
 
