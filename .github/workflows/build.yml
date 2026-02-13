@@ -17,10 +17,12 @@ jobs:
       - name: setup jdk
         uses: actions/setup-java@v4
         with:
-          java-version: '21'
+          java-version: '17'
           distribution: 'microsoft'
       - name: make gradle wrapper executable
-        run: chmod +x ./gradlew
+        run: |
+          mkdir -p libs
+          curl -L -o libs/voxy-0.2.6-fabric-flicking-forge-could-used.jar https://pan.quark.cn/s/4fad0422ff9a
       - name: build
         run: ./gradlew build
       - name: capture build artifacts
