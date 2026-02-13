@@ -22,13 +22,6 @@ jobs:
       - name: make gradle wrapper executable
         run: chmod +x ./gradlew
         
-      - name: download Voxy 0.2.6 jar
-        run: |
-          mkdir -p libs
-          curl -L -o libs/voxy-0.2.6-fabric-flicking-forge-could-used.jar https://github.com/mc3355411/AMD-Patch-for-Voxy/releases/download/voxy-0.2.6/voxy-0.2.6-fabric-flicking-forge-could-used.jar
-      - name: List libs directory
-        run: ls -la libs/
-        
       - name: build
         run: ./gradlew build
       - name: capture build artifacts
