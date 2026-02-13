@@ -19,10 +19,10 @@ jobs:
         with:
           java-version: '17'
           distribution: 'microsoft'
-      - name: make gradle wrapper executable
+      - name: download Voxy 0.2.6 jar
         run: |
           mkdir -p libs
-          curl -L -o libs/voxy-0.2.6-fabric-flicking-forge-could-used.jar https://pan.quark.cn/s/4fad0422ff9a
+          curl -L -o libs/voxy-0.2.6-fabric-flicking-forge-could-used.jar https://github.com/mc3355411/AMD-Patch-for-Voxy/releases/download/voxy-0.2.6/voxy-0.2.6-fabric-flicking-forge-could-used.jar
       - name: build
         run: ./gradlew build
       - name: capture build artifacts
