@@ -19,6 +19,9 @@ jobs:
         with:
           java-version: '17'
           distribution: 'microsoft'
+      - name: make gradle wrapper executable
+        run: chmod +x ./gradlew
+        
       - name: download Voxy 0.2.6 jar
         run: |
           mkdir -p libs
