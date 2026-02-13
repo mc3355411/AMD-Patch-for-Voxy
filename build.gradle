@@ -33,7 +33,7 @@ dependencies {
     modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
 
     // 编译时依赖 Voxy（必须将 Voxy 0.2.6 的 jar 放入 libs 文件夹）
-    modCompileOnly files("libs/voxy-0.2.6-fabric-flicking-forge-could-used.jar")
+    modCompileOnly files("voxy-0.2.6-fabric-flicking-forge-could-used.jar")
 }
 
 processResources {
