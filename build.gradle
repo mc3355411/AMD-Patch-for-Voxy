@@ -31,9 +31,6 @@ dependencies {
     mappings loom.officialMojangMappings()
     modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
     modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
-
-    // 编译时依赖 Voxy（必须将 Voxy 0.2.6 的 jar 放入 libs 文件夹）
-    compileOnly fileTree(dir: 'libs', include: ['*.jar'])
 }
 
 processResources {
