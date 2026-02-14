@@ -21,7 +21,9 @@ private static void injectAmdFix(String id, CallbackInfoReturnable<String> cir) 
         System.out.println("[AMDPatch] Source is EMPTY for id: " + id);
         return;
     }
-    System.out.println("[AMDPatch] Source length: " + source.length() + ", first 200 chars: " + source.substring(0, Math.min(200, source.length())));
+    // 打印完整源码
+    System.out.println("[AMDPatch] Full source for " + id + ":\n" + source);
+    // 检查目标行
     if (source.contains("float sp = texelFetch(hizDepthSampler, ivec2(x, y), ml).r;")) {
         System.out.println("[AMDPatch] Found target line, patching...");
         String fix = """
