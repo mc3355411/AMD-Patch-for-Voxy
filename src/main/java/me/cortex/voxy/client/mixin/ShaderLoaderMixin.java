@@ -10,25 +10,28 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public class ShaderLoaderMixin {
 
     @Inject(method = "parse(Ljava/lang/String;)Ljava/lang/String;", at = @At("RETURN"), cancellable = true, remap = false)
-    private static void injectAmdFix(String id, CallbackInfoReturnable<String> cir) {
-        System.out.println("[AMDPatch] ShaderLoaderMixin injected for id: " + id);
-        String source = cir.getReturnValue();
-        if (source != null) {
-        System.out.println("[AMDPatch] Source snippet (first 1000 chars): " + source.substring(0, Math.min(1000, source.length())));
+private static void injectAmdFix(String id, CallbackInfoReturnable<String> cir) {
+    System.out.println("[AMDPatch] ShaderLoaderMixin injected for id: " + id);
+    String source = cir.getReturnValue();
+    if (source == null) {
+        System.out.println("[AMDPatch] Source is NULL for id: " + id);
+        return;
     }
-        
-        // Check if the shader contains the code we want to patch
-        // The target code is: float sp = texelFetch(hizDepthSampler, ivec2(x, y), ml).r;
-        if (source != null && source.contains("float sp = texelFetch(hizDepthSampler, ivec2(x, y), ml).r;")) {
-            System.out.println("[AMDPatch] Found target line, patching...");
-             String fix = """
-                    float sp = texelFetch(hizDepthSampler, ivec2(x, y), ml).r;
-                    if (sp <= 0.0001f) {
-                        sp = 1.0f;
-                    }
-                    """;
-             String patched = source.replace("float sp = texelFetch(hizDepthSampler, ivec2(x, y), ml).r;", fix);
-             cir.setReturnValue(patched);
-        }
+    if (source.isEmpty()) {
+        System.out.println("[AMDPatch] Source is EMPTY for id: " + id);
+        return;
     }
+    System.out.println("[AMDPatch] Source length: " + source.length() + ", first 200 chars: " + source.substring(0, Math.min(200, source.length())));
+    if (source.contains("float sp = texelFetch(hizDepthSampler, ivec2(x, y), ml).r;")) {
+        System.out.println("[AMDPatch] Found target line, patching...");
+        String fix = """
+                float sp = texelFetch(hizDepthSampler, ivec2(x, y), ml).r;
+                if (sp <= 0.0001f) {
+                    sp = 1.0f;
+                }
+                """;
+        String patched = source.replace("float sp = texelFetch(hizDepthSampler, ivec2(x, y), ml).r;", fix);
+        cir.setReturnValue(patched);
+    }
+}
 }
