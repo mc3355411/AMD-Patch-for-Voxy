@@ -13,6 +13,9 @@ public class ShaderLoaderMixin {
     private static void injectAmdFix(String id, CallbackInfoReturnable<String> cir) {
         System.out.println("[AMDPatch] ShaderLoaderMixin injected for id: " + id);
         String source = cir.getReturnValue();
+        if (source != null) {
+        System.out.println("[AMDPatch] Source snippet (first 1000 chars): " + source.substring(0, Math.min(1000, source.length())));
+    }
         
         // Check if the shader contains the code we want to patch
         // The target code is: float sp = texelFetch(hizDepthSampler, ivec2(x, y), ml).r;
